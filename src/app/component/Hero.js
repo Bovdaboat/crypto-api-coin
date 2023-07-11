@@ -4,10 +4,32 @@ import { Fragment } from "react";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import axios from "axios"
+import Coin from "@/app/component/Coin";
 
 const Hero = () => {
 
-    // https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&locale=en
+    const [coins, setCoins] = useState([])
+    const [search, setSearch] = useState("")
+
+    useEffect(() => {
+        axios.get('https://api.coingecko.com/api/v3/' +
+            'coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&locale=en')
+            .then(res => {
+                setCoins(res.data)
+                console.log(res.data)
+            })
+            .catch(error => console.log(error))
+    }, [])
+
+
+    const handleChange = e => {
+        setSearch(e.target.value)
+    }
+
+    const filteredCoins = coins.filter(coins =>
+    coins.name.toLowerCase().includes(search.toLowerCase())
+    )
+
 
     return(
         <div className="hero min-h-screen bg-base-200">
@@ -23,6 +45,7 @@ const Hero = () => {
                             <div className="flex space-x-1">
                                 <input
                                     type="text"
+                                    onChange={handleChange}
                                     className="block w-full px-4 py-2 text-blue-700
                                     bg-white border rounded-full focus:border-blue-400 focus:ring-blue-300
                                     focus:outline-none focus:ring focus:ring-opacity-40 justify-center"
@@ -45,8 +68,35 @@ const Hero = () => {
                                     </svg>
                                 </button>
                             </div>
+
+                                {filteredCoins.map(coin => {
+                                return <Coin
+                                    key={coin.id}
+                                    name={coin.name}
+                                    image={coin.image}
+                                    symbol={coin.symbol}
+                                    marketcap={coin.market_cap}
+                                    price={coin.current_price}
+                                    priceChange={coin.price._change_percentage_24}
+                                    value={coin.total_valume}
+                                    />
+                                })}
                         </div>
                     </Fragment>
+                        <div className="flex justify-center p-8">
+                           this is were the file is going to go
+                            {filteredCoins.map(coin => {
+                            return <Coin
+                                key={coin.id}
+                                name={coin.name}
+                                image={coin.image}
+                                symbol={coin.symbol}
+                                marketcap={coin.market_cap}
+                                price={coin.current_price}
+                                priceChange={coin.price._change_percentage_24}
+                                value={coin.total_valume}
+                            />
+                        })}</div>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,5 @@
 "use client"
 import React from "react";
-import { Fragment } from "react";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import axios from "axios"
@@ -39,7 +38,7 @@ const Hero = () => {
                     <p className="py-6 text-blue-500">Discover the current value of cryptocurrencies
                         and unlock the potential of the digital market.</p>
                     <div>
-                    <Fragment>
+
 
                         <div className="flex justify-center">
                             <div className="flex space-x-1">
@@ -68,23 +67,9 @@ const Hero = () => {
                                     </svg>
                                 </button>
                             </div>
-
-                                {filteredCoins.map(coin => {
-                                return <Coin
-                                    key={coin.id}
-                                    name={coin.name}
-                                    image={coin.image}
-                                    symbol={coin.symbol}
-                                    marketcap={coin.market_cap}
-                                    price={coin.current_price}
-                                    priceChange={coin.price._change_percentage_24}
-                                    value={coin.total_valume}
-                                    />
-                                })}
                         </div>
-                    </Fragment>
-                        <div className="flex justify-center p-8">
-                           this is were the file is going to go
+                    <div className="m-5 flex bg-base-300 w-full">
+                        <div className="p-8">
                             {filteredCoins.map(coin => {
                             return <Coin
                                 key={coin.id}
@@ -93,10 +78,11 @@ const Hero = () => {
                                 symbol={coin.symbol}
                                 marketcap={coin.market_cap}
                                 price={coin.current_price}
-                                priceChange={coin.price._change_percentage_24}
+                                priceChange={coin.price_change_percentage_24}
                                 value={coin.total_valume}
                             />
                         })}</div>
+                    </div>
                     </div>
                 </div>
             </div>

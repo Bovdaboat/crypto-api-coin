@@ -1,7 +1,6 @@
 "use client"
 import React from "react";
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import axios from "axios"
 import Coin from "@/app/component/Coin";
 

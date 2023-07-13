@@ -29,7 +29,7 @@ const Navbar = () => {
             <div className="navbar-start">
             </div>
             <div className="navbar-center">
-                <a className="btn btn-base normal-case text-xl">CoinHive</a>
+                <a href="https://www.linkedin.com/in/ignat-gabov-97319a145/" className="btn btn-base normal-case text-xl">CoinHive</a>
             </div>
             <div className="navbar-end">
                 <label className="swap swap-rotate">
